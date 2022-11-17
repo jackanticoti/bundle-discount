@@ -4,8 +4,8 @@ import { Cart, EcommItemType, useCart, AddPurchaseableItemPayload, useCartChecko
 function Sale() {
 
     return (
-        <div className='bg-red-400 flex flex-row justify-between'>
-            <h1 className='text-2xl text-center'>Bundle Sale!</h1>
+        <div className='bg-red-400 flex flex-row justify-between h-48 p-10'>
+            <h1 className='text-4xl text-center'>Bundle Sale!!!!</h1>
             <Cart checkoutUrl='/orders'>
                 <div className='flex flex-row'>
                     <AddBundle/>
@@ -25,9 +25,12 @@ export function CustomCart() {
     const [showCart, setShowCart] = useState(false)
 
     let cartItems = items.map((item, index) => {
-        return <h1 key={`key${index}`}>
-            {item.title}
-        </h1>
+        return <div
+            className='flex flex-row'
+            key={`key${index}`}>
+            <h1 className='mr-2'>Item: {item.title}....</h1>
+            <h1>${item.priceInCents / 100}</h1>
+        </div>
     })
 
     let checkout;
@@ -35,7 +38,7 @@ export function CustomCart() {
     if (items.length > 0) {
         checkout = <h1
             className='hover:bg-slate-100 rounded-lg hover:cursor-pointer
-            bg-slate-200 text-center text-2xl'
+            bg-slate-200 text-center text-2xl mr-10 h-10 px-4'
             onClick={() => {
                 startCheckout()
             }}>
@@ -60,21 +63,23 @@ export function CustomCart() {
 
     let fullCart;
     if (showCart) {
-        fullCart = <div>
+        fullCart = <div className='flex flex-col'>
             { cartItems }
             { remove }
         </div>
     }
 
     return (
-        <div>
-            <h1
-                className='text-2xl justify-center'
-                onClick={() => setShowCart(!showCart)}
-            >
-                Cart({totalQuantity})
-            </h1>
-            { fullCart }
+        <div className='flex flex-row'>
+            <div className='flex flex-col mr-10'>
+                <h1
+                    className='text-2xl justify-center'
+                    onClick={() => setShowCart(!showCart)}
+                >
+                    Cart({totalQuantity})
+                </h1>
+                { fullCart }
+            </div>
             { checkout }
         </div>
     )
@@ -106,7 +111,7 @@ export function AddBundle() {
       <div>
         <h1
             className='hover:bg-slate-100 rounded-lg hover:cursor-pointer
-            bg-slate-200 text-center text-2xl mr-10'
+            bg-slate-200 text-center text-2xl mr-10 px-4'
             onClick={() => {
                 addPurchaseableItem(course1)
                 addPurchaseableItem(course32)

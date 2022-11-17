@@ -27,7 +27,7 @@ function Page() {
         buttonUrl="/signin"
         buttonText="Sign in"
       />
-      {/* <Sale/> */}
+      <Sale/>
       <FeaturedContentComp
         onAddedToQueue={function (item: HydratedContentItem): Promise<boolean | void> {
           throw new Error('Function not implemented.');
